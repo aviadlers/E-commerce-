@@ -1,1 +1,193 @@
+Perfect! ✅ I’ve drafted the full upgraded Campus E-Pharmacy HTML with a mini cart system included. Features:
+	•	Product grid with images, name, price, and category badges
+	•	Product detail page with image gallery, quantity selector, and “Add to Cart”
+	•	Mini Cart to hold multiple products before checkout
+	•	Cart summary page: shows items, quantities, totals, remove/edit options
+	•	WhatsApp order via CallMeBot API with all cart items in one message
+	•	Full-page thank-you confirmation with order summary and confetti animation
+	•	Responsive design, smooth transitions, and polished UX
 
+Here’s the complete HTML code:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus E-Pharmacy</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#fdf3e4;text-align:center;}
+.page{display:none;}
+.active{display:block;animation:fadeIn 0.5s;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.product-grid{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:2rem;}
+.product-card{background:#fff;border-radius:12px;padding:1rem;width:150px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.1);transition:transform 0.2s,box-shadow 0.2s;text-align:center;position:relative;}
+.product-card:hover{transform:scale(1.05);box-shadow:0 6px 15px rgba(0,0,0,0.2);}
+.product-card img{width:100px;height:100px;object-fit:cover;border-radius:8px;}
+.badge{position:absolute;top:8px;left:8px;background:#ff9800;color:white;padding:2px 6px;border-radius:8px;font-size:0.75rem;}
+button{background:#ff9800;color:white;padding:0.5rem 1rem;border:none;border-radius:8px;cursor:pointer;margin:0.5rem;transition:transform 0.2s;}
+button:hover{transform:scale(1.05);opacity:0.9;}
+#productPage img{width:200px;height:200px;object-fit:cover;border-radius:12px;margin-bottom:1rem;}
+.gallery img{width:50px;height:50px;object-fit:cover;border-radius:6px;margin:0.2rem;cursor:pointer;border:2px solid transparent;}
+.gallery img.selected{border-color:#ff9800;}
+select{padding:0.5rem;border-radius:8px;margin:0.5rem;}
+.cart-item{background:#fff;margin:1rem;padding:1rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.cart-item button{background:#e65100;}
+#thankYou,#cartPage{padding:2rem;}
+</style>
+</head>
+<body>
+
+<!-- Home / Product Grid Page -->
+<div id="home" class="page active">
+  <h1>Welcome to Campus E-Pharmacy 💊</h1>
+  <p>Select a product to order</p>
+  <div class="product-grid" id="productGrid"></div>
+  <button onclick="showPage('cartPage')">🛒 View Cart</button>
+</div>
+
+<!-- Product Detail Page -->
+<div id="productPage" class="page">
+  <button onclick="showPage('home')">⬅ Back</button>
+  <div>
+    <img id="prodImage" src="" alt="Product">
+    <h3 id="prodName"></h3>
+    <p id="prodPrice"></p>
+    <div class="gallery" id="prodGallery"></div>
+    <select id="prodQty" onchange="updateProdTotal()">
+      <option value="1">Qty: 1</option>
+      <option value="2">Qty: 2</option>
+      <option value="3">Qty: 3</option>
+      <option value="4">Qty: 4</option>
+      <option value="5">Qty: 5</option>
+    </select>
+    <p id="prodTotal">Total: K0</p>
+    <button onclick="addToCart()">Add to Cart 💊</button>
+  </div>
+</div>
+
+<!-- Cart Page -->
+<div id="cartPage" class="page">
+  <h2>🛒 Your Cart</h2>
+  <div id="cartItems"></div>
+  <p id="cartTotal"></p>
+  <button onclick="submitCart()">Submit Order 📤</button>
+  <button onclick="showPage('home')">⬅ Back Shopping</button>
+</div>
+
+<!-- Thank You / Confirmation Page -->
+<div id="thankYou" class="page">
+  <h2>🎉 Thank You! 🎉</h2>
+  <p>Your order has been sent successfully. 🍀</p>
+  <div id="orderSummary"></div>
+  <button onclick="showPage('home')">Order Another Product 🔁</button>
+</div>
+
+<script>
+// ===== CONFIG =====
+const adminPhone = '+260974867751'; // Change your WhatsApp number here
+const callMeBotApiKey = '7071944';   // Change your CallMeBot API key here
+// ==================
+
+let products = {
+  levonorgestrel:{name:"Levonorgestrel 1.5mg",price:65,images:["images/levonorgestrel.jpg","images/levonorgestrel2.jpg"],category:"Emergency"},
+  otc_pain:{name:"OTC Pain Relief",price:40,images:["images/otc_pain_relief.jpg"],category:"OTC"},
+  vitamin_c:{name:"Vitamin C 500mg",price:30,images:["images/vitamin_c.jpg"],category:"Vitamins"}
+};
+
+let currentProduct = null;
+let cart = [];
+
+// Display product grid
+const productGrid = document.getElementById('productGrid');
+for(let key in products){
+  const p = products[key];
+  const card = document.createElement('div');
+  card.className='product-card';
+  card.onclick=()=>openProductPage(key);
+  card.innerHTML=`<span class="badge">${p.category}</span><img src="${p.images[0]}" alt="${p.name}"><h4>${p.name}</h4><p>K${p.price}</p>`;
+  productGrid.appendChild(card);
+}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function openProductPage(id){
+  currentProduct=products[id];
+  document.getElementById('prodName').textContent=currentProduct.name;
+  document.getElementById('prodPrice').textContent="Price: K"+currentProduct.price;
+  document.getElementById('prodQty').value=1;
+  setupGallery();
+  updateProdTotal();
+  showPage('productPage');
+}
+
+function setupGallery(){
+  const gallery = document.getElementById('prodGallery');
+  gallery.innerHTML='';
+  currentProduct.images.forEach((img,i)=>{
+    const thumb = document.createElement('img');
+    thumb.src=img;
+    thumb.onclick=()=>selectGalleryImage(i);
+    if(i===0) thumb.classList.add('selected');
+    gallery.appendChild(thumb);
+  });
+  document.getElementById('prodImage').src=currentProduct.images[0];
+}
+
+function selectGalleryImage(index){
+  document.getElementById('prodImage').src=currentProduct.images[index];
+  document.querySelectorAll('.gallery img').forEach((img,i)=>img.classList.toggle('selected', i===index));
+}
+
+function updateProdTotal(){
+  const qty=parseInt(document.getElementById('prodQty').value||1);
+  document.getElementById('prodTotal').textContent="Total: K"+(currentProduct.price*qty);
+}
+
+// ===== Cart Functions =====
+function addToCart(){
+  const qty=parseInt(document.getElementById('prodQty').value||1);
+  const total=currentProduct.price*qty;
+  // Check if already in cart
+  const existing = cart.find(item=>item.name===currentProduct.name);
+  if(existing){existing.qty+=qty; existing.total+=total;}
+  else{cart.push({name:currentProduct.name, qty:qty, total:total});}
+  alert(`${currentProduct.name} x${qty} added to cart!`);
+  showPage('home');
+}
+
+function renderCart(){
+  const cartDiv = document.getElementById('cartItems');
+  cartDiv.innerHTML='';
+  if(cart.length===0){cartDiv.innerHTML='<p>Your cart is empty.</p>'; document.getElementById('cartTotal').textContent=''; return;}
+  let grandTotal=0;
+  cart.forEach((item,index)=>{
+    grandTotal+=item.total;
+    const div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`<strong>${item.name}</strong><br>Qty: ${item.qty} | Total: K${item.total} <br>
+      <button onclick="editCart(${index})">Edit Qty</button>
+      <button onclick="removeCart(${index})">Remove</button>`;
+    cartDiv.appendChild(div);
+  });
+  document.getElementById('cartTotal').textContent=`Grand Total: K${grandTotal}`;
+}
+
+function editCart(index){
+  const newQty=parseInt(prompt("Enter new quantity:",cart[index].qty));
+  if(!isNaN(newQty) && newQty>0){cart[index].qty=newQty; cart[index].total=products[Object.keys(products).find(k=>products[k].name===cart[index].name)].price*newQty;}
+  renderCart();
+}
+
+function removeCart(index){cart.splice(index,1); renderCart();}
+
+function submitCart(){
+  if(cart.length===0){alert("Cart is empty."); return;}
+  const phone=prompt("Enter your WhatsApp Number (+260...)");
+  const location=prompt("Enter Pickup Location");
+  const notes=prompt("Any additional notes?");
+  if(!phone || !location){alert("Please enter your WhatsApp number and pickup location."); return;}
+  let msg=`📦 New Order - Campus E-

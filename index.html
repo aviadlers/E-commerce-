@@ -1,222 +1,1342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium E-commerce Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0; padding: 0;
-    background: linear-gradient(135deg, #FDEBD0, #FAD7A0);
-    scroll-behavior: smooth;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus E-Pharmacy - Your Health, Our Priority</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  /* Header */
-  header {
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.95);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
-  header h1 { color: #C47E2C; margin: 0; font-size: 24px; }
-  nav a {
-    margin-left: 20px; text-decoration: none; color: #333; font-weight: 600;
-    transition: color 0.3s;
-  }
-  nav a:hover { color: #C47E2C; }
+        :root {
+            --primary: #2a7de1;
+            --secondary: #00c6ab;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --background: #fdf3e4;
+        }
 
-  /* Category Filter */
-  .filters { text-align: center; margin: 20px 0; }
-  .filters button {
-    background: #fff; border: 1px solid #C47E2C; color: #C47E2C;
-    padding: 10px 15px; margin: 5px; border-radius: 12px;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .filters button:hover, .filters button.active {
-    background: #C47E2C; color: #fff;
-  }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #1e88e5;
+                --secondary: #00bca4;
+                --accent: #ff5252;
+                --light: #1a1a1a;
+                --dark: #f5f5f5;
+                --background: #2d2d2d;
+            }
+        }
 
-  /* Product Cards */
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    padding: 20px;
-  }
-  .product-card {
-    background: #fff; border-radius: 16px; width: 260px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; position: relative;
-  }
-  .product-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  }
+        @media (prefers-contrast: high) {
+            :root {
+                --primary: #0044cc;
+                --secondary: #008080;
+                --accent: #cc0000;
+            }
+            
+            .btn {
+                border: 2px solid var(--dark);
+            }
+        }
 
-  /* Product Slider */
-  .slider {
-    position: relative; overflow: hidden; width: 100%; height: 200px;
-  }
-  .slider img {
-    width: 100%; height: 200px; object-fit: cover;
-    transition: transform 0.5s ease;
-  }
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
-  .product-card h3 { margin: 15px; color: #333; font-weight: 600; }
-  .product-card p { margin: 0 15px 10px; color: #555; font-weight: 500; }
-  .product-card button {
-    background: linear-gradient(45deg, #C47E2C, #F39C12);
-    color: #fff; border: none; width: calc(100% - 30px);
-    margin: 10px 15px 20px; padding: 12px; border-radius: 12px;
-    font-size: 16px; cursor: pointer; transition: all 0.3s ease;
-  }
-  .product-card button:hover {
-    background: linear-gradient(45deg, #A3611F, #D35400);
-    transform: scale(1.05);
-  }
+        body {
+            background: linear-gradient(135deg, var(--background) 0%, #f9e4bc 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
 
-  /* Modal */
-  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-    width: 100%; height: 100%; background: rgba(0,0,0,0.7);
-    justify-content: center; align-items: center; backdrop-filter: blur(5px);
-  }
-  .modal-content {
-    background: #fff; padding: 30px 25px; border-radius: 20px;
-    width: 90%; max-width: 450px; position: relative;
-    animation: slideIn 0.3s ease;
-  }
-  .close { position: absolute; top: 15px; right: 20px; font-size: 26px; font-weight: bold; cursor: pointer; color: #C47E2C; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-  label { display: block; margin-top: 15px; color: #333; font-weight: 500; }
-  input, textarea { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #ccc; font-size: 15px; }
-  button#submitOrder { background: linear-gradient(45deg, #C47E2C, #F39C12); color: #fff; margin-top: 20px; width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; cursor: pointer; transition: all 0.3s ease; }
-  button#submitOrder:hover { background: linear-gradient(45deg, #A3611F, #D35400); transform: scale(1.05); }
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
 
-  @keyframes slideIn { from {transform: translateY(-30px); opacity:0;} to {transform: translateY(0); opacity:1;} }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
 
-  @media(max-width: 600px){ .products { flex-direction: column; align-items: center; } }
-</style>
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-emergency {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(42, 125, 225, 0.9), rgba(0, 198, 171, 0.9)), url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        /* Filter & Search */
+        .filter-search {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-search input, .filter-search select {
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            flex: 1 1 200px;
+            max-width: 300px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stock-status {
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .in-stock {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .low-stock {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .out-of-stock {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* Medical Disclaimer */
+        .medical-disclaimer {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .medical-disclaimer h4 {
+            color: #e65100;
+            margin-bottom: 0.5rem;
+        }
+
+        .medical-disclaimer ul {
+            margin-left: 1.5rem;
+        }
+
+        .medical-disclaimer li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Product Detail Page */
+        .product-detail {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .product-detail img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .gallery img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery img.selected {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        select {
+            padding: 0.75rem;
+            border-radius: 10px;
+            margin: 0.5rem;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        /* Cart Page */
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Order Form Styles */
+        .order-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 125, 225, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        .terms-agreement {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .terms-agreement label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .terms-agreement input {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        /* Thank You Page */
+        .order-summary {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+
+        .order-id {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* Loading States */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        .skeleton-text {
+            height: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-image {
+            height: 200px;
+            width: 100%;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        h1, h2, h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-
-<header>
-  <h1>Adler's Shop</h1>
-  <nav>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<div class="filters">
-  <button class="filterBtn active" data-category="all">All</button>
-  <button class="filterBtn" data-category="cat1">Category 1</button>
-  <button class="filterBtn" data-category="cat2">Category 2</button>
-</div>
-
-<div id="products" class="products">
-  <div class="product-card" data-category="cat1" data-product="Product 1">
-    <div class="slider">
-      <img src="https://via.placeholder.com/260x200?text=1a" alt="">
-      <img src="https://via.placeholder.com/260x200?text=1b" alt="">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>Processing your order...</div>
     </div>
-    <h3>Product 1</h3>
-    <p>₵65</p>
-    <button class="orderBtn">Order Now</button>
-  </div>
-  <div class="product-card" data-category="cat2" data-product="Product 2">
-    <div class="slider">
-      <img src="https://via.placeholder.com/260x200?text=2a" alt="">
-      <img src="https://via.placeholder.com/260x200?text=2b" alt="">
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>Campus E-Pharmacy</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="btn-emergency" onclick="showEmergencyContacts()" title="Emergency Contacts">
+                    <i class="fas fa-phone-alt"></i> Emergency
+                </button>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home / Product Grid Page -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="container">
+                <h1>Your Health, Our Priority 💊</h1>
+                <p>Get quality medications delivered right to your campus doorstep. Fast, reliable, and discreet service for all your healthcare needs.</p>
+                <a href="#products" class="btn">Shop Now</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <h2>Select a product to order</h2>
+
+            <!-- FILTER + SEARCH -->
+            <div class="filter-search">
+                <input type="text" id="searchInput" placeholder="Search medicine..." oninput="filterProducts()">
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="all">All Categories</option>
+                    <option value="Vitamins">Vitamins</option>
+                    <option value="OTC">OTC</option>
+                    <option value="Emergency">Emergency</option>
+                    <option value="First Aid">First Aid</option>
+                </select>
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+        </div>
     </div>
-    <h3>Product 2</h3>
-    <p>₵120</p>
-    <button class="orderBtn">Order Now</button>
-  </div>
-</div>
 
-<!-- Modal -->
-<div id="orderModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 style="color:#C47E2C;">Place Your Order</h2>
-    <form id="orderForm">
-      <label>Name:</label>
-      <input type="text" id="name" required>
-      <label>WhatsApp Number:</label>
-      <input type="tel" id="whatsapp" required placeholder="+260...">
-      <label>Quantity:</label>
-      <input type="number" id="quantity" min="1" value="1">
-      <label>Message (optional):</label>
-      <textarea id="message" placeholder="Any notes"></textarea>
-      <button type="submit" id="submitOrder">Send Order via WhatsApp</button>
-    </form>
-  </div>
-</div>
+    <!-- Product Detail Page -->
+    <div id="productPage" class="page">
+        <div class="container">
+            <button onclick="showPage('home')" class="btn-secondary" style="margin-bottom: 2rem;"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="product-detail">
+                <img id="prodImage" src="" alt="Product">
+                <h3 id="prodName"></h3>
+                <p id="prodPrice"></p>
+                <div id="prodStock" class="stock-status"></div>
+                
+                <div class="medical-disclaimer">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important Medical Information</h4>
+                    <ul>
+                        <li>Consult with a healthcare professional before using any medication</li>
+                        <li>Read all instructions and warnings before use</li>
+                        <li>Store medications properly and keep out of reach of children</li>
+                        <li>Report any adverse effects to campus health services immediately</li>
+                    </ul>
+                </div>
+                
+                <div class="gallery" id="prodGallery"></div>
+                <select id="prodQty" onchange="updateProdTotal()">
+                    <option value="1">Qty: 1</option>
+                    <option value="2">Qty: 2</option>
+                    <option value="3">Qty: 3</option>
+                    <option value="4">Qty: 4</option>
+                    <option value="5">Qty: 5</option>
+                </select>
+                <p id="prodTotal" style="font-size: 1.2rem; font-weight: bold;">Total: K0</p>
+                <button onclick="addToCart()" class="btn"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
-<script>
-// Modal
-const modal = document.getElementById("orderModal");
-const closeModal = document.querySelector(".close");
-const orderBtns = document.querySelectorAll(".orderBtn");
-let selectedProduct = "";
+    <!-- Cart Page -->
+    <div id="cartPage" class="page">
+        <div class="container">
+            <button onclick="showPage('home')" class="btn-secondary" style="margin-bottom: 2rem;"><i class="fas fa-arrow-left"></i> Back Shopping</button>
+            <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+            
+            <div class="cart-items" id="cartItems"></div>
+            
+            <div class="cart-summary">
+                <div class="cart-total" id="cartTotal">Total: K0</div>
+                <button onclick="submitCart()" class="btn"><i class="fas fa-paper-plane"></i> Submit Order</button>
+            </div>
+        </div>
+    </div>
 
-orderBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    selectedProduct = btn.parentElement.dataset.product;
-    modal.style.display = "flex";
-  });
-});
-closeModal.onclick = () => modal.style.display = "none";
-window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
+    <!-- Checkout Page -->
+    <div id="checkoutPage" class="page">
+        <div class="container">
+            <button onclick="showPage('cartPage')" class="btn-secondary" style="margin-bottom: 2rem;"><i class="fas fa-arrow-left"></i> Back to Cart</button>
+            <h2><i class="fas fa-checkout"></i> Checkout</h2>
+            
+            <div class="order-form">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input type="text" id="customerName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerPhone">WhatsApp Number *</label>
+                    <input type="text" id="customerPhone" placeholder="e.g., 0974867751 or +260974867751" required>
+                    <div class="form-note">Enter your WhatsApp number for order updates</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerLocation">Pickup Location *</label>
+                    <select id="customerLocation" required>
+                        <option value="">Select your campus location</option>
+                        <option value="Main Campus">Main Campus</option>
+                        <option value="Student Union">Student Union</option>
+                        <option value="Library">Library</option>
+                        <option value="Hostels">Hostels</option>
+                        <option value="Other">Other (specify in notes)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deliveryTime">Preferred Delivery Time</label>
+                    <select id="deliveryTime">
+                        <option value="asap">As Soon As Possible (1-2 hours)</option>
+                        <option value="9-12">Morning (9 AM - 12 PM)</option>
+                        <option value="12-3">Afternoon (12 PM - 3 PM)</option>
+                        <option value="3-6">Evening (3 PM - 6 PM)</option>
+                    </select>
+                    <div class="form-note" id="deliveryNote">Fast campus-wide delivery</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deliveryInstructions">Delivery Instructions</label>
+                    <textarea id="deliveryInstructions" placeholder="e.g., Leave at security desk, Call when arrived..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerNotes">Additional Notes</label>
+                    <textarea id="customerNotes" placeholder="Any special instructions or notes for delivery"></textarea>
+                </div>
+                
+                <div class="terms-agreement">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" required>
+                        I agree to the Terms of Service and confirm I have read all product information
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <button onclick="processOrder()" class="btn"><i class="fas fa-paper-plane"></i> Submit Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-// WhatsApp Order
-document.getElementById("orderForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const name = document.getElementById("name").value;
-  const whatsapp = document.getElementById("whatsapp").value;
-  const quantity = document.getElementById("quantity").value;
-  const message = document.getElementById("message").value;
-  const text = `New Order:%0AProduct: ${selectedProduct}%0AQuantity: ${quantity}%0AName: ${name}%0AWhatsApp: ${whatsapp}%0AMessage: ${message}`;
-  window.open(`https://wa.me/YOUR_WHATSAPP_NUMBER?text=${text}`, "_blank");
-  modal.style.display = "none";
-});
+    <!-- Thank You Page -->
+    <div id="thankYou" class="page">
+        <div class="container">
+            <h2><i class="fas fa-check-circle"></i> Thank You! 🎉</h2>
+            <p>Your order has been sent successfully. 🍀</p>
+            <div class="order-summary" id="orderSummary"></div>
+            <button onclick="showPage('home')" class="btn"><i class="fas fa-redo"></i> Order Another Product</button>
+        </div>
+    </div>
 
-// Filter
-const filterBtns = document.querySelectorAll(".filterBtn");
-const productCards = document.querySelectorAll(".product-card");
+    <script>
+        // ===== CONFIG =====
+        const adminPhone = '+260974867751';
 
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const cat = btn.dataset.category;
-    productCards.forEach(card => {
-      if(cat === "all" || card.dataset.category === cat){
-        card.style.display = "block";
-      } else { card.style.display = "none"; }
-    });
-  });
-});
+        // Sample products with enhanced information
+        let products = {
+            levonorgestrel: {
+                name: "Levonorgestrel 1.5mg",
+                price: 65,
+                description: "Emergency contraceptive for pregnancy prevention within 72 hours of unprotected intercourse",
+                dosage: "Take 1 tablet as soon as possible, within 72 hours for best efficacy",
+                sideEffects: "Nausea, headache, dizziness, fatigue, breast tenderness",
+                warnings: "Not for regular contraception. Does not protect against STIs.",
+                storage: "Store at room temperature, away from moisture",
+                images: [
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1585435557343-3b092031d5ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                ],
+                category: "Emergency",
+                requiresAgeVerification: true,
+                stock: 8,
+                lowStockThreshold: 3
+            },
+            otc_pain: {
+                name: "OTC Pain Relief",
+                price: 40,
+                description: "Fast-acting pain relief for headaches, muscle aches, and minor arthritis pain",
+                dosage: "Take 1-2 tablets every 4-6 hours as needed",
+                sideEffects: "Upset stomach, heartburn, drowsiness",
+                warnings: "Do not exceed 8 tablets in 24 hours. Consult doctor if pain persists.",
+                storage: "Store in a cool, dry place",
+                images: [
+                    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                ],
+                category: "OTC",
+                requiresAgeVerification: false,
+                stock: 25,
+                lowStockThreshold: 5
+            },
+            vitamin_c: {
+                name: "Vitamin C 500mg",
+                price: 25,
+                description: "Immune support and antioxidant protection",
+                dosage: "Take 1 tablet daily with food",
+                sideEffects: "Mild digestive upset at high doses",
+                warnings: "Consult doctor if pregnant or nursing",
+                storage: "Store in a cool, dry place away from sunlight",
+                images: [
+                    "https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                category: "Vitamins",
+                requiresAgeVerification: false,
+                stock: 30,
+                lowStockThreshold: 5
+            },
+            first_aid_kit: {
+                name: "Campus First Aid Kit",
+                price: 120,
+                description: "Comprehensive first aid kit for minor injuries and emergencies",
+                dosage: "Use as needed for minor cuts, scrapes, and burns",
+                sideEffects: "None when used as directed",
+                warnings: "For external use only. Seek professional help for serious injuries.",
+                storage: "Store in a dry, accessible location",
+                images: [
+                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                category: "First Aid",
+                requiresAgeVerification: false,
+                stock: 5,
+                lowStockThreshold: 2
+            }
+        };
 
-// Slider
-document.querySelectorAll('.slider').forEach(slider => {
-  const imgs = slider.querySelectorAll('img');
-  let index = 0;
-  setInterval(() => {
-    imgs.forEach((img,i)=> img.style.transform = `translateX(-${index*100}%)`);
-    index = (index+1)%imgs.length;
-  }, 2500);
-});
-</script>
+        // Initialize cart from localStorage or empty object
+        let cart = JSON.parse(localStorage.getItem('pharmacyCart')) || {};
+        let selectedProduct = null;
+        let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
 
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('pharmacyCart', JSON.stringify(cart));
+        }
+
+        // Save order history
+        function saveOrderHistory() {
+            localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        }
+
+        // ===== SAFETY FEATURES =====
+        function showEmergencyContacts() {
+            const contacts = `
+Campus Emergency Contacts:
+
+🚑 Campus Health Center: +260-XXX-XXXX
+🚨 Emergency Services: 911 / 112
+🏥 Nearest Hospital: University Teaching Hospital
+💊 Pharmacy Hotline: +260-974-867-751
+👥 Student Support: +260-XXX-XXXX
+
+For medical emergencies, contact campus health services immediately.
+            `;
+            alert(contacts);
+        }
+
+        function verifyAgeForProduct(productId) {
+            const product = products[productId];
+            if (product.requiresAgeVerification) {
+                const age = prompt("Please confirm you are 18 years or older (Enter your age):");
+                if (!age || parseInt(age) < 18) {
+                    alert("You must be 18 years or older to purchase this medication.");
+                    return false;
+                }
+                
+                const confirmed = confirm("IMPORTANT: This medication requires proper understanding of its use and limitations. Have you consulted with a healthcare professional about using this medication?");
+                if (!confirmed) {
+                    alert("Please consult with a healthcare professional before purchasing this medication.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // ===== STOCK MANAGEMENT =====
+        function checkStock(productId, quantity) {
+            const product = products[productId];
+            if (product.stock === 0) {
+                return { available: false, message: "Out of Stock", class: "out-of-stock" };
+            }
+            if (product.stock < quantity) {
+                return { 
+                    available: false, 
+                    message: `Only ${product.stock} left in stock`,
+                    class: "out-of-stock"
+                };
+            }
+            if (product.stock <= product.lowStockThreshold) {
+                return { 
+                    available: true, 
+                    message: `Low stock - only ${product.stock} left`,
+                    class: "low-stock"
+                };
+            }
+            return { 
+                available: true, 
+                message: "In Stock",
+                class: "in-stock"
+            };
+        }
+
+        function updateStock(productId, quantity) {
+            if (products[productId]) {
+                products[productId].stock -= quantity;
+                // In a real app, you would save this to a database
+            }
+        }
+
+        // ===== ORDER TRACKING =====
+        function generateOrderId() {
+            return 'CAMPUS-' + Date.now().toString().slice(-6) + '-' + Math.random().toString(36).substr(2, 3).toUpperCase();
+        }
+
+        // ===== DELIVERY OPTIONS =====
+        function updateDeliveryMessage() {
+            const deliveryTime = document.getElementById('deliveryTime').value;
+            const deliveryNote = document.getElementById('deliveryNote');
+            
+            const messages = {
+                'asap': 'Fast campus-wide delivery (1-2 hours)',
+                '9-12': 'Morning delivery (9 AM - 12 PM)',
+                '12-3': 'Afternoon delivery (12 PM - 3 PM)',
+                '3-6': 'Evening delivery (3 PM - 6 PM)'
+            };
+            
+            deliveryNote.textContent = messages[deliveryTime] || 'Fast campus-wide delivery';
+        }
+
+        // ===== PAGE NAV =====
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page).classList.add('active');
+            if (page === 'home') renderProducts();
+            updateCartCount();
+        }
+
+        // ===== PRODUCT GRID =====
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            
+            let hasProducts = false;
+            
+            for (let key in products) {
+                const p = products[key];
+                const stockStatus = checkStock(key, 1);
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openProductPage(key);
+                card.innerHTML = `
+                    <span class="product-badge">${p.category}</span>
+                    <img src="${p.images[0]}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">${p.name}</h3>
+                        <p class="product-price">K${p.price}</p>
+                        <div class="stock-status ${stockStatus.class}">${stockStatus.message}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+                hasProducts = true;
+            }
+            
+            if (!hasProducts) {
+                grid.innerHTML = '<p class="empty-cart">No products found matching your search.</p>';
+            }
+        }
+
+        // ===== FILTER + SEARCH =====
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+
+            let hasProducts = false;
+
+            for (let key in products) {
+                const p = products[key];
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === 'all' || p.category === category;
+                const stockStatus = checkStock(key, 1);
+
+                if (matchesSearch && matchesCategory) {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.onclick = () => openProductPage(key);
+                    card.innerHTML = `
+                        <span class="product-badge">${p.category}</span>
+                        <img src="${p.images[0]}" alt="${p.name}" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-name">${p.name}</h3>
+                            <p class="product-price">K${p.price}</p>
+                            <div class="stock-status ${stockStatus.class}">${stockStatus.message}</div>
+                        </div>
+                    `;
+                    productGrid.appendChild(card);
+                    hasProducts = true;
+                }
+            }
+            
+            if (!hasProducts) {
+                productGrid.innerHTML = '<p class="empty-cart">No products found matching your search.</p>';
+            }
+        }
+
+        // ===== PRODUCT DETAIL =====
+        function openProductPage(key) {
+            selectedProduct = key;
+            const p = products[key];
+            const stockStatus = checkStock(key, 1);
+            
+            document.getElementById('prodName').textContent = p.name;
+            document.getElementById('prodPrice').textContent = `Price: K${p.price}`;
+            document.getElementById('prodImage').src = p.images[0];
+            document.getElementById('prodQty').value = 1;
+            document.getElementById('prodTotal').textContent = `Total: K${p.price}`;
+            document.getElementById('prodStock').textContent = stockStatus.message;
+            document.getElementById('prodStock').className = `stock-status ${stockStatus.class}`;
+
+            const gallery = document.getElementById('prodGallery');
+            gallery.innerHTML = '';
+            p.images.forEach((img, idx) => {
+                const imgEl = document.createElement('img');
+                imgEl.src = img;
+                if(idx===0) imgEl.classList.add('selected');
+                imgEl.onclick = () => {
+                    document.getElementById('prodImage').src = img;
+                    gallery.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
+                    imgEl.classList.add('selected');
+                }
+                gallery.appendChild(imgEl);
+            });
+
+            showPage('productPage');
+        }
+
+        function updateProdTotal() {
+            const qty = parseInt(document.getElementById('prodQty').value);
+            const price = products[selectedProduct].price;
+            document.getElementById('prodTotal').textContent = `Total: K${qty * price}`;
+        }
+
+        function addToCart() {
+            if (!verifyAgeForProduct(selectedProduct)) {
+                return;
+            }
+            
+            const qty = parseInt(document.getElementById('prodQty').value);
+            const stockCheck = checkStock(selectedProduct, qty);
+            
+            if (!stockCheck.available) {
+                alert(stockCheck.message);
+                return;
+            }
+            
+            if (cart[selectedProduct]) {
+                cart[selectedProduct].qty += qty;
+            } else {
+                cart[selectedProduct] = { 
+                    name: products[selectedProduct].name,
+                    price: products[selectedProduct].price,
+                    qty: qty 
+                };
+            }
+            
+            saveCart();
+            updateCartCount();
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            alert(`${products[selectedProduct].name} added to cart!`);
+            showPage('cartPage');
+            renderCart();
+        }
+
+        // ===== CART =====
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            
+            if (Object.keys(cart).length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>Your cart is empty</h3>
+                        <p>Add some products to get started!</p>
+                    </div>
+                `;
+                document.getElementById('cartTotal').textContent = 'Total: K0';
+                return;
+            }
+            
+            let total = 0;
+            for(let key in cart) {
+                const item = cart[key];
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">K${item.price} x ${item.qty} = K${itemTotal}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="removeCartItem('${key}')" class="btn-secondary"><i class="fas fa-minus"></i></button>
+                        <button onclick="addOne('${key}')" class="btn-secondary"><i class="fas fa-plus"></i></button>
+                    </div>
+                `;
+                cartItems.appendChild(div);
+            }
+            document.getElementById('cartTotal').textContent = `Total: K${total}`;
+            updateCartCount();
+        }
+
+        function removeCartItem(key) {
+            if(cart[key].qty > 1) {
+                cart[key].qty--;
+            } else {
+                delete cart[key];
+            }
+            saveCart();
+            renderCart();
+        }
+
+        function addOne(key) {
+            const stockCheck = checkStock(key, cart[key].qty + 1);
+            if (!stockCheck.available) {
+                alert(stockCheck.message);
+                return;
+            }
+            
+            cart[key].qty++;
+            saveCart();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            const count = Object.values(cart).reduce((acc, item) => acc + item.qty, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
+
+        function submitCart() {
+            if(Object.keys(cart).length === 0){
+                alert("Your cart is empty! Please add some products first.");
+                return;
+            }
+            
+            // Check stock for all items in cart
+            for(let key in cart) {
+                const stockCheck = checkStock(key, cart[key].qty);
+                if (!stockCheck.available) {
+                    alert(`Sorry, ${products[key].name} is ${stockCheck.message.toLowerCase()}. Please update your cart.`);
+                    renderCart();
+                    return;
+                }
+            }
+            
+            showPage('checkoutPage');
+        }
+
+        function processOrder() {
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                // Collect customer information
+                const customerName = document.getElementById('customerName').value.trim();
+                const customerPhone = document.getElementById('customerPhone').value.trim();
+                const customerLocation = document.getElementById('customerLocation').value;
+                const deliveryTime = document.getElementById('deliveryTime').value;
+                const deliveryInstructions = document.getElementById('deliveryInstructions').value.trim();
+                const customerNotes = document.getElementById('customerNotes').value.trim();
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+
+                // Validation
+                if (!customerName || !customerPhone || !customerLocation) {
+                    alert("Please fill in all required fields (marked with *).");
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    return;
+                }
+
+                if (!agreeTerms) {
+                    alert("Please agree to the Terms of Service to continue.");
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    return;
+                }
+
+                // Improved phone validation
+                const phoneRegex = /^(\+?260|0)?(97|96|76|77|95|66)\d{7}$/;
+                if (!phoneRegex.test(customerPhone.replace(/\s/g, ''))) {
+                    alert("Please enter a valid Zambian mobile number (e.g., 0974867751 or +260974867751).");
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    return;
+                }
+
+                // Format phone number for WhatsApp
+                let formattedPhone = customerPhone.replace(/\s/g, '');
+                if (formattedPhone.startsWith('0')) {
+                    formattedPhone = '+260' + formattedPhone.substring(1);
+                } else if (!formattedPhone.startsWith('+')) {
+                    formattedPhone = '+' + formattedPhone;
+                }
+
+                // Generate order ID
+                const orderId = generateOrderId();
+
+                // Create detailed order message
+                let message = `📦 New Order - Campus E-Pharmacy%0A%0A`;
+                message += `📋 Order ID: ${orderId}%0A`;
+                message += `👤 Customer: ${customerName}%0A`;
+                message += `📞 WhatsApp: ${formattedPhone}%0A`;
+                message += `📍 Pickup: ${customerLocation}%0A`;
+                
+                // Add delivery time
+                const deliveryTimes = {
+                    'asap': 'As Soon As Possible (1-2 hours)',
+                    '9-12': 'Morning (9 AM - 12 PM)',
+                    '12-3': 'Afternoon (12 PM - 3 PM)',
+                    '3-6': 'Evening (3 PM - 6 PM)'
+                };
+                message += `⏰ Delivery Time: ${deliveryTimes[deliveryTime]}%0A`;
+                
+                if (deliveryInstructions) {
+                    message += `📝 Delivery Instructions: ${deliveryInstructions}%0A`;
+                }
+                
+                message += `💬 Notes: ${customerNotes || 'None'}%0A%0A`;
+                message += `🛒 Order Items:%0A`;
+                
+                let grandTotal = 0;
+                for(let key in cart){
+                    const item = cart[key];
+                    const itemTotal = item.price * item.qty;
+                    grandTotal += itemTotal;
+                    message += `- ${item.name} (Qty: ${item.qty}) - K${itemTotal}%0A`;
+                    
+                    // Update stock
+                    updateStock(key, item.qty);
+                }
+                
+                message += `%0A💰 Grand Total: K${grandTotal}`;
+
+                // Save order to history
+                const order = {
+                    id: orderId,
+                    date: new Date().toLocaleString(),
+                    customer: { name: customerName, phone: formattedPhone },
+                    location: customerLocation,
+                    deliveryTime: deliveryTimes[deliveryTime],
+                    items: Object.values(cart),
+                    total: grandTotal,
+                    status: 'confirmed'
+                };
+                
+                orderHistory.unshift(order);
+                saveOrderHistory();
+
+                // Send to WhatsApp
+                const url = `https://wa.me/${adminPhone}?text=${message}`;
+                window.open(url, '_blank');
+
+                // Create order summary for thank you page
+                const summaryDiv = document.getElementById('orderSummary');
+                summaryDiv.innerHTML = `
+                    <div class="order-id">Order ID: ${orderId}</div>
+                    <h3>Order Summary</h3>
+                    <p><strong>Customer:</strong> ${customerName}</p>
+                    <p><strong>Phone:</strong> ${formattedPhone}</p>
+                    <p><strong>Pickup Location:</strong> ${customerLocation}</p>
+                    <p><strong>Delivery Time:</strong> ${deliveryTimes[deliveryTime]}</p>
+                    ${deliveryInstructions ? `<p><strong>Delivery Instructions:</strong> ${deliveryInstructions}</p>` : ''}
+                    <p><strong>Notes:</strong> ${customerNotes || 'None'}</p>
+                    <h4>Order Items:</h4>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        ${Object.values(cart).map(item => 
+                            `<li>${item.name} x ${item.qty} - K${item.price * item.qty}</li>`
+                        ).join('')}
+                    </ul>
+                    <p><strong>Grand Total: K${grandTotal}</strong></p>
+                    <p>We'll contact you shortly on WhatsApp to confirm your order!</p>
+                `;
+
+                // Clear cart after successful order
+                cart = {};
+                saveCart();
+                updateCartCount();
+                
+                // Hide loading
+                document.getElementById('loadingOverlay').classList.remove('active');
+                
+                // Show celebration
+                confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+                
+                showPage('thankYou');
+            }, 1500);
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCartCount();
+            renderCart();
+            updateDeliveryMessage();
+            
+            // Setup cart icon click
+            document.getElementById('cartIcon').addEventListener('click', function() {
+                showPage('cartPage');
+            });
+            
+            // Setup delivery time change listener
+            document.getElementById('deliveryTime').addEventListener('change', updateDeliveryMessage);
+        });
+    </script>
 </body>
 </html>

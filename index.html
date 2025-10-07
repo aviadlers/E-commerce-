@@ -39,15 +39,18 @@
             line-height: 1.6;
             min-height: 100vh;
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            flex: 1;
         }
 
-        /* Header Styles */
+        /* Header Styles - Consistent across all pages */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
@@ -55,9 +58,6 @@
             box-shadow: var(--shadow);
             border-radius: 16px;
             margin-bottom: 2rem;
-            position: sticky;
-            top: 1rem;
-            z-index: 100;
         }
 
         .header-content {
@@ -73,10 +73,17 @@
             gap: 10px;
             font-size: 1.5rem;
             font-weight: 700;
+            cursor: pointer;
         }
 
         .logo i {
             font-size: 2rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .cart-icon {
@@ -114,9 +121,11 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.9rem;
-            margin-left: 1rem;
             transition: all 0.3s;
             box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .btn-emergency:hover {
@@ -303,6 +312,94 @@
             border: 1px solid #ef4444;
         }
 
+        /* Image Slider */
+        .product-slider {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .slider-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+            z-index: 3;
+        }
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            color: var(--primary);
+        }
+
+        .slider-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
         /* Medical Disclaimer - HIGHLY VISIBLE */
         .medical-disclaimer {
             background: #fffbeb;
@@ -339,19 +436,10 @@
             padding: 2rem;
             border-radius: 20px;
             box-shadow: var(--shadow);
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
             border: 1px solid var(--border);
-        }
-
-        .product-detail img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         select {
@@ -438,10 +526,10 @@
             border: 1px solid var(--border);
         }
 
-        /* Order Form Styles */
+        /* COMPACT ORDER FORM STYLES */
         .order-form {
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 16px;
             box-shadow: var(--shadow);
             max-width: 500px;
@@ -450,26 +538,26 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 600;
             color: var(--dark);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             background: var(--card-bg);
             color: var(--dark);
@@ -484,36 +572,39 @@
         }
 
         .form-group textarea {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
 
         .form-note {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             margin-top: 0.25rem;
             font-weight: 500;
         }
 
         .terms-agreement {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
+            margin: 1.2rem 0;
+            padding: 1rem;
             background: var(--light);
             border-radius: 8px;
             border: 1px solid var(--border);
+            font-size: 0.9rem;
         }
 
         .terms-agreement label {
             display: flex;
             align-items: flex-start;
             gap: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
+            line-height: 1.4;
         }
 
         .terms-agreement input {
             width: auto;
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
         }
 
         /* Thank You Page */
@@ -558,7 +649,7 @@
             display: flex;
         }
 
-        /* Modal Styles */
+        /* MOBILE-FRIENDLY MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -571,6 +662,8 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(5px);
+            padding: 1rem;
+            box-sizing: border-box;
         }
 
         .modal.active {
@@ -579,19 +672,38 @@
 
         .modal-content {
             background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 16px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
+            max-height: 90vh;
             box-shadow: var(--shadow-lg);
             position: relative;
             border: 1px solid var(--border);
             animation: modalSlideIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes modalSlideIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .modal-footer {
+            margin-top: 1.2rem;
+            flex-shrink: 0;
         }
 
         .modal-close {
@@ -602,6 +714,7 @@
             cursor: pointer;
             color: var(--text-light);
             transition: color 0.3s;
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -647,7 +760,7 @@
 
         /* Quick Order Form */
         .quick-order-form {
-            margin-top: 1.5rem;
+            margin-top: 0.5rem;
         }
 
         .form-row {
@@ -762,6 +875,77 @@
             min-width: 150px;
         }
 
+        /* Filter and Search */
+        .filter-search {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-search input,
+        .filter-search select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--dark);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-search input:focus,
+        .filter-search select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Product Details Section */
+        .product-description {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .product-description h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-description p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -799,6 +983,69 @@
             .action-buttons .btn {
                 width: 100%;
             }
+
+            /* Mobile-specific form adjustments */
+            .order-form {
+                padding: 1.2rem;
+            }
+
+            .modal-content {
+                padding: 1.2rem;
+                max-height: 85vh;
+            }
+
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+
+            .terms-agreement {
+                margin: 1rem 0;
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .product-slider {
+                max-width: 100%;
+            }
+
+            .filter-search {
+                flex-direction: column;
+            }
+
+            .filter-search input,
+            .filter-search select {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal {
+                padding: 0.5rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+                max-height: 80vh;
+            }
+            
+            .order-form {
+                padding: 1rem;
+            }
+            
+            .form-group {
+                margin-bottom: 0.7rem;
+            }
         }
 
         h1, h2, h3 {
@@ -827,65 +1074,78 @@
     <div class="modal" id="emergencyModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal('emergencyModal')">&times;</span>
-            <h2><i class="fas fa-phone-alt"></i> Emergency Contacts</h2>
-            <p>In case of medical emergencies, contact these services immediately:</p>
+            <div class="modal-header">
+                <h2><i class="fas fa-phone-alt"></i> Emergency Contacts</h2>
+                <p>In case of medical emergencies, contact these services immediately:</p>
+            </div>
             
-            <div class="emergency-contacts">
-                <div class="emergency-contact">
-                    <i class="fas fa-hospital"></i>
-                    <div class="emergency-contact-info">
-                        <h4>Campus Health Center</h4>
-                        <p>+260-XXX-XXXX</p>
+            <div class="modal-body">
+                <div class="emergency-contacts">
+                    <div class="emergency-contact">
+                        <i class="fas fa-hospital"></i>
+                        <div class="emergency-contact-info">
+                            <h4>Campus Health Center</h4>
+                            <p>+260-XXX-XXXX</p>
+                        </div>
                     </div>
-                </div>
-                <div class="emergency-contact">
-                    <i class="fas fa-ambulance"></i>
-                    <div class="emergency-contact-info">
-                        <h4>Emergency Services</h4>
-                        <p>911 / 112</p>
+                    <div class="emergency-contact">
+                        <i class="fas fa-ambulance"></i>
+                        <div class="emergency-contact-info">
+                            <h4>Emergency Services</h4>
+                            <p>911 / 112</p>
+                        </div>
                     </div>
-                </div>
-                <div class="emergency-contact">
-                    <i class="fas fa-clinic-medical"></i>
-                    <div class="emergency-contact-info">
-                        <h4>Nearest Hospital</h4>
-                        <p>University Teaching Hospital</p>
+                    <div class="emergency-contact">
+                        <i class="fas fa-clinic-medical"></i>
+                        <div class="emergency-contact-info">
+                            <h4>Nearest Hospital</h4>
+                            <p>University Teaching Hospital</p>
+                        </div>
                     </div>
-                </div>
-                <div class="emergency-contact">
-                    <i class="fas fa-prescription-bottle-alt"></i>
-                    <div class="emergency-contact-info">
-                        <h4>Pharmacy Hotline</h4>
-                        <p>+260-974-867-751</p>
+                    <div class="emergency-contact">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <div class="emergency-contact-info">
+                            <h4>Pharmacy Hotline</h4>
+                            <p>+260-974-867-751</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;" onclick="closeModal('emergencyModal')">Close</button>
+            <div class="modal-footer">
+                <button class="btn btn-primary" style="width: 100%;" onclick="closeModal('emergencyModal')">Close</button>
+            </div>
         </div>
     </div>
 
     <!-- Age Verification Modal -->
     <div class="modal" id="ageVerificationModal">
         <div class="modal-content">
-            <h2><i class="fas fa-exclamation-triangle"></i> Age Verification Required</h2>
-            <p>This medication requires you to be 18 years or older. Please confirm your age:</p>
-            
-            <div class="form-group">
-                <label for="ageInput">Your Age</label>
-                <input type="number" id="ageInput" min="1" max="120" placeholder="Enter your age">
+            <span class="modal-close" onclick="closeModal('ageVerificationModal')">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Age Verification Required</h2>
+                <p>This medication requires you to be 18 years or older. Please confirm your age:</p>
             </div>
             
-            <div class="terms-agreement">
-                <label>
-                    <input type="checkbox" id="ageConsent">
-                    I confirm that I have consulted with a healthcare professional about using this medication
-                </label>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="ageInput">Your Age</label>
+                    <input type="number" id="ageInput" min="1" max="120" placeholder="Enter your age">
+                </div>
+                
+                <div class="terms-agreement">
+                    <label>
+                        <input type="checkbox" id="ageConsent">
+                        I confirm that I have consulted with a healthcare professional about using this medication
+                    </label>
+                </div>
             </div>
             
-            <div class="form-group" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                <button class="btn btn-secondary" style="flex: 1;" onclick="closeModal('ageVerificationModal')">Cancel</button>
-                <button class="btn btn-primary" style="flex: 1;" onclick="verifyAge()">Confirm</button>
+            <div class="modal-footer">
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="closeModal('ageVerificationModal')">Cancel</button>
+                    <button class="btn btn-primary" onclick="verifyAge()">Confirm</button>
+                </div>
             </div>
         </div>
     </div>
@@ -894,65 +1154,70 @@
     <div class="modal" id="quickOrderModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal('quickOrderModal')">&times;</span>
-            <h2><i class="fas fa-bolt"></i> Quick Order</h2>
-            <p>Complete your order in just a few steps:</p>
+            <div class="modal-header">
+                <h2><i class="fas fa-bolt"></i> Quick Order</h2>
+                <p>Complete your order in just a few steps:</p>
+            </div>
             
-            <div class="quick-order-form">
-                <div class="form-group">
-                    <label for="quickName">Full Name *</label>
-                    <input type="text" id="quickName" placeholder="Enter your full name" required>
-                </div>
-                
-                <div class="form-row">
+            <div class="modal-body">
+                <div class="quick-order-form">
                     <div class="form-group">
-                        <label for="quickPhone">WhatsApp Number *</label>
-                        <input type="text" id="quickPhone" placeholder="e.g., 0974867751" required>
+                        <label for="quickName">Full Name (Optional)</label>
+                        <input type="text" id="quickName" placeholder="Enter your name (or leave blank for anonymous)">
+                        <div class="form-note">Your name will appear as "Anonymous" if left blank</div>
                     </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quickPhone">WhatsApp Number *</label>
+                            <input type="text" id="quickPhone" placeholder="e.g., 0974867751" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quickLocation">Pickup Location *</label>
+                            <select id="quickLocation" required>
+                                <option value="">Select location</option>
+                                <option value="Main Campus">Main Campus</option>
+                                <option value="Student Union">Student Union</option>
+                                <option value="Library">Library</option>
+                                <option value="Hostels">Hostels</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
-                        <label for="quickLocation">Pickup Location *</label>
-                        <select id="quickLocation" required>
-                            <option value="">Select location</option>
-                            <option value="Main Campus">Main Campus</option>
-                            <option value="Student Union">Student Union</option>
-                            <option value="Library">Library</option>
-                            <option value="Hostels">Hostels</option>
-                            <option value="Other">Other</option>
+                        <label for="quickDelivery">Preferred Delivery Time</label>
+                        <select id="quickDelivery">
+                            <option value="asap">As Soon As Possible</option>
+                            <option value="9-12">Morning (9 AM - 12 PM)</option>
+                            <option value="12-3">Afternoon (12 PM - 3 PM)</option>
+                            <option value="3-6">Evening (3 PM - 6 PM)</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="deliveryInstructions">Delivery Instructions</label>
+                        <textarea id="deliveryInstructions" placeholder="e.g., Leave at security desk, Call when arrived..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerNotes">Additional Notes</label>
+                        <textarea id="customerNotes" placeholder="Any special instructions or notes for delivery"></textarea>
+                    </div>
+                    
+                    <div class="terms-agreement">
+                        <label>
+                            <input type="checkbox" id="quickAgree" required>
+                            I agree to the Terms of Service and confirm I have read all product information
+                        </label>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="quickDelivery">Preferred Delivery Time</label>
-                    <select id="quickDelivery">
-                        <option value="asap">As Soon As Possible</option>
-                        <option value="9-12">Morning (9 AM - 12 PM)</option>
-                        <option value="12-3">Afternoon (12 PM - 3 PM)</option>
-                        <option value="3-6">Evening (3 PM - 6 PM)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="deliveryInstructions">Delivery Instructions</label>
-                    <textarea id="deliveryInstructions" placeholder="e.g., Leave at security desk, Call when arrived..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customerNotes">Additional Notes</label>
-                    <textarea id="customerNotes" placeholder="Any special instructions or notes for delivery"></textarea>
-                </div>
-                
-                <div class="terms-agreement">
-                    <label>
-                        <input type="checkbox" id="quickAgree" required>
-                        I agree to the Terms of Service and confirm I have read all product information
-                    </label>
-                </div>
-                
-                <div class="form-group" style="margin-top: 1.5rem;">
-                    <button class="btn btn-primary" style="width: 100%;" onclick="processQuickOrder()">
-                        <i class="fas fa-paper-plane"></i> Complete Order
-                    </button>
-                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-primary" style="width: 100%;" onclick="processQuickOrder()">
+                    <i class="fas fa-paper-plane"></i> Complete Order
+                </button>
             </div>
         </div>
     </div>
@@ -960,15 +1225,15 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <div class="logo">
+            <div class="logo" onclick="showPage('home')">
                 <i class="fas fa-prescription-bottle-alt"></i>
                 <span>Campus E-Pharmacy</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="header-actions">
                 <button class="btn-emergency" onclick="openModal('emergencyModal')" title="Emergency Contacts">
                     <i class="fas fa-phone-alt"></i> Emergency
                 </button>
-                <div class="cart-icon" id="cartIcon">
+                <div class="cart-icon" id="cartIcon" onclick="showPage('cartPage')">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </div>
@@ -982,7 +1247,7 @@
             <div class="container">
                 <h1>Your Health, Our Priority 💊</h1>
                 <p>Get quality medications delivered right to your campus doorstep. Fast, reliable, and discreet service for all your healthcare needs.</p>
-                <a href="#products" class="btn btn-primary">Shop Now</a>
+                <button class="btn btn-primary" onclick="scrollToProducts()">Shop Now</button>
             </div>
         </section>
 
@@ -1011,7 +1276,7 @@
                 </ul>
             </div>
 
-            <h2>Select a product to order</h2>
+            <h2 id="products">Select a product to order</h2>
 
             <!-- FILTER + SEARCH -->
             <div class="filter-search">
@@ -1034,10 +1299,33 @@
         <div class="container">
             <button onclick="showPage('home')" class="btn btn-secondary" style="margin-bottom: 2rem;"><i class="fas fa-arrow-left"></i> Back to Products</button>
             <div class="product-detail">
-                <img id="prodImage" src="" alt="Product">
+                <div class="product-slider">
+                    <div class="slider-container">
+                        <div class="slider-track" id="sliderTrack"></div>
+                        <div class="slider-nav">
+                            <button class="slider-btn" onclick="prevSlide()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-btn" onclick="nextSlide()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slider-dots" id="sliderDots"></div>
+                </div>
+                
                 <h3 id="prodName"></h3>
                 <p id="prodPrice"></p>
                 <div id="prodStock" class="stock-status"></div>
+                
+                <div class="product-description">
+                    <h3><i class="fas fa-info-circle"></i> Product Details</h3>
+                    <p id="prodDescription"></p>
+                    <p><strong>Dosage:</strong> <span id="prodDosage"></span></p>
+                    <p><strong>Side Effects:</strong> <span id="prodSideEffects"></span></p>
+                    <p><strong>Warnings:</strong> <span id="prodWarnings"></span></p>
+                    <p><strong>Storage:</strong> <span id="prodStorage"></span></p>
+                </div>
                 
                 <div class="medical-disclaimer">
                     <h4><i class="fas fa-exclamation-triangle"></i> Important Medical Information</h4>
@@ -1094,43 +1382,56 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                &copy; 2023 Campus E-Pharmacy. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
     <script>
         // ===== CONFIG =====
         const adminPhone = '260974867751';
         const apiKey = '7071944';
 
-        // Sample products with enhanced information
+        // Sample products with enhanced information - UPDATED PRODUCTS
         let products = {
-            levonorgestrel: {
-                name: "Levonorgestrel 1.5mg",
-                price: 65,
-                description: "Emergency contraceptive for pregnancy prevention within 72 hours of unprotected intercourse",
-                dosage: "Take 1 tablet as soon as possible, within 72 hours for best efficacy",
-                sideEffects: "Nausea, headache, dizziness, fatigue, breast tenderness",
-                warnings: "Not for regular contraception. Does not protect against STIs.",
-                storage: "Store at room temperature, away from moisture",
+            morning_after_pill: {
+                name: "Morning After Pill",
+                price: 45,
+                description: "Emergency contraceptive for pregnancy prevention within 72-120 hours of unprotected intercourse",
+                dosage: "Take 1 tablet as soon as possible after unprotected sex. Most effective within 72 hours, can work up to 120 hours",
+                sideEffects: "Nausea, headache, dizziness, fatigue, breast tenderness, abdominal pain",
+                warnings: "Not for regular contraception. Does not protect against STIs. May disrupt menstrual cycle. Not recommended for frequent use.",
+                storage: "Store at room temperature, away from moisture and direct sunlight",
                 images: [
-                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
                 category: "Emergency",
                 requiresAgeVerification: true,
-                stock: 8,
+                stock: 12,
                 lowStockThreshold: 3
             },
-            otc_pain: {
-                name: "OTC Pain Relief",
-                price: 40,
-                description: "Fast-acting pain relief for headaches, muscle aches, and minor arthritis pain",
-                dosage: "Take 1-2 tablets every 4-6 hours as needed",
-                sideEffects: "Upset stomach, heartburn, drowsiness",
-                warnings: "Do not exceed 8 tablets in 24 hours. Consult doctor if pain persists.",
-                storage: "Store in a cool, dry place",
+            pregnancy_test: {
+                name: "Pregnancy Test Kit",
+                price: 35,
+                description: "Rapid home pregnancy test with 99% accuracy from the day of expected period",
+                dosage: "Use first morning urine for best results. Follow package instructions carefully",
+                sideEffects: "None when used as directed",
+                warnings: "Read instructions completely before use. Consult healthcare provider regardless of result. False results possible if test expired or improperly used.",
+                storage: "Store in a cool, dry place. Do not freeze.",
                 images: [
-                    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                    "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
                 category: "OTC",
                 requiresAgeVerification: false,
-                stock: 25,
+                stock: 20,
                 lowStockThreshold: 5
             },
             vitamin_c: {
@@ -1142,7 +1443,9 @@
                 warnings: "Consult doctor if pregnant or nursing",
                 storage: "Store in a cool, dry place away from sunlight",
                 images: [
-                    "https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    "https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
                 category: "Vitamins",
                 requiresAgeVerification: false,
@@ -1158,7 +1461,9 @@
                 warnings: "For external use only. Seek professional help for serious injuries.",
                 storage: "Store in a dry, accessible location",
                 images: [
-                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
                 category: "First Aid",
                 requiresAgeVerification: false,
@@ -1171,7 +1476,70 @@
         let cart = JSON.parse(localStorage.getItem('pharmacyCart')) || {};
         let selectedProduct = null;
         let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
-        let pendingAction = null; // Track pending actions for age verification
+        let pendingAction = null;
+        let currentSlide = 0;
+
+        // ===== SCROLL TO PRODUCTS FUNCTION =====
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // ===== IMAGE SLIDER FUNCTIONS =====
+        function initSlider(images) {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const sliderDots = document.getElementById('sliderDots');
+            
+            sliderTrack.innerHTML = '';
+            sliderDots.innerHTML = '';
+            
+            images.forEach((image, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'slider-slide';
+                slide.innerHTML = `<img src="${image}" alt="Product Image ${index + 1}">`;
+                sliderTrack.appendChild(slide);
+                
+                // Create dot
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                sliderDots.appendChild(dot);
+            });
+            
+            currentSlide = 0;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            const product = products[selectedProduct];
+            currentSlide = (currentSlide + 1) % product.images.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            const product = products[selectedProduct];
+            currentSlide = (currentSlide - 1 + product.images.length) % product.images.length;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
 
         // Save cart to localStorage
         function saveCart() {
@@ -1329,7 +1697,9 @@
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page).classList.add('active');
+            
             if (page === 'home') renderProducts();
+            if (page === 'cartPage') renderCart();
             updateCartCount();
         }
 
@@ -1412,11 +1782,20 @@
             
             document.getElementById('prodName').textContent = p.name;
             document.getElementById('prodPrice').textContent = `Price: K${p.price}`;
-            document.getElementById('prodImage').src = p.images[0];
             document.getElementById('prodQty').value = 1;
             document.getElementById('prodTotal').textContent = `Total: K${p.price}`;
             document.getElementById('prodStock').textContent = stockStatus.message;
             document.getElementById('prodStock').className = `stock-status ${stockStatus.class}`;
+            
+            // Set product details
+            document.getElementById('prodDescription').textContent = p.description;
+            document.getElementById('prodDosage').textContent = p.dosage;
+            document.getElementById('prodSideEffects').textContent = p.sideEffects;
+            document.getElementById('prodWarnings').textContent = p.warnings;
+            document.getElementById('prodStorage').textContent = p.storage;
+
+            // Initialize image slider
+            initSlider(p.images);
 
             showPage('productPage');
         }
@@ -1586,7 +1965,7 @@
             const agreeTerms = document.getElementById('quickAgree').checked;
 
             // Validation
-            if (!customerName || !customerPhone || !customerLocation) {
+            if (!customerPhone || !customerLocation) {
                 showNotification("Please fill in all required fields.", true);
                 return;
             }
@@ -1628,10 +2007,13 @@
                 // Generate order ID
                 const orderId = generateOrderId();
 
+                // Use "Anonymous" if name is not provided
+                const displayName = customerName || 'Anonymous';
+
                 // Create detailed order message
                 let message = `📦 *NEW ORDER - CAMPUS E-PHARMACY* 📦\n\n`;
                 message += `📋 *Order ID:* ${orderId}\n`;
-                message += `👤 *Customer:* ${customerName}\n`;
+                message += `👤 *Customer:* ${displayName}\n`;
                 message += `📞 *WhatsApp:* ${formattedPhone}\n`;
                 message += `📍 *Pickup Location:* ${customerLocation}\n`;
                 
@@ -1677,7 +2059,7 @@
                     id: orderId,
                     date: new Date().toLocaleString(),
                     customer: { 
-                        name: customerName, 
+                        name: displayName, 
                         phone: formattedPhone 
                     },
                     location: customerLocation,
@@ -1697,7 +2079,7 @@
                 summaryDiv.innerHTML = `
                     <div class="order-id">Order ID: ${orderId}</div>
                     <h3>Order Summary</h3>
-                    <p><strong>Customer:</strong> ${customerName}</p>
+                    <p><strong>Customer:</strong> ${displayName}</p>
                     <p><strong>Phone:</strong> ${formattedPhone}</p>
                     <p><strong>Pickup Location:</strong> ${customerLocation}</p>
                     <p><strong>Delivery Time:</strong> ${deliveryTimes[deliveryTime]}</p>

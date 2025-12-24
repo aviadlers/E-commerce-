@@ -1344,7 +1344,7 @@
         <div class="header-content">
             <a href="#" class="logo" onclick="showPage('home'); return false;">
                 <div class="logo-image-container">
-                    <!-- LOGO SRC CAN BE REPLACED HERE -->
+                    <!-- REPLACE THIS SRC WITH YOUR LOGO -->
                     <img id="headerLogo" class="logo-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iMTUiIGZpbGw9IiMwRDQ3QTEiLz4KPHRleHQgeD0iNTAlIiB5PSI1NSUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzBweCIgZm9udC13ZWlnaHQ9ImJvbGQiPkE8L3RleHQ+Cjwvc3ZnPg==" alt="Adler Pharmaceuticals Logo">
                 </div>
                 <div class="logo-text">
@@ -1414,7 +1414,68 @@
                 </select>
             </div>
 
-            <div class="product-grid" id="productGrid"></div>
+            <!-- PRODUCT GRID - ALL IMAGES USE SRC ATTRIBUTES -->
+            <div class="product-grid" id="productGrid">
+                <!-- Morning After Pill -->
+                <div class="product-card" onclick="openProductPage('morning_after_pill')">
+                    <span class="product-badge">Emergency</span>
+                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Morning After Pill" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Morning After Pill</h3>
+                        <p class="product-price">K45</p>
+                        <div class="stock-status in-stock">In Stock</div>
+                    </div>
+                </div>
+
+                <!-- Condoms -->
+                <div class="product-card" onclick="openProductPage('condoms')">
+                    <span class="product-badge">Contraceptives</span>
+                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1579656596496-79d38aa4f76d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Premium Condoms" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Condoms (3-pack)</h3>
+                        <p class="product-price">K25</p>
+                        <div class="stock-status in-stock">In Stock</div>
+                    </div>
+                </div>
+
+                <!-- Pregnancy Test -->
+                <div class="product-card" onclick="openProductPage('pregnancy_test')">
+                    <span class="product-badge">OTC</span>
+                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pregnancy Test Kit" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Pregnancy Test Kit</h3>
+                        <p class="product-price">K35</p>
+                        <div class="stock-status in-stock">In Stock</div>
+                    </div>
+                </div>
+
+                <!-- Vitamin C -->
+                <div class="product-card" onclick="openProductPage('vitamin_c')">
+                    <span class="product-badge">Vitamins</span>
+                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Vitamin C 500mg" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Vitamin C 500mg</h3>
+                        <p class="product-price">K25</p>
+                        <div class="stock-status in-stock">In Stock</div>
+                    </div>
+                </div>
+
+                <!-- First Aid Kit -->
+                <div class="product-card" onclick="openProductPage('first_aid_kit')">
+                    <span class="product-badge">First Aid</span>
+                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Campus First Aid Kit" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Campus First Aid Kit</h3>
+                        <p class="product-price">K120</p>
+                        <div class="stock-status in-stock">In Stock</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1510,7 +1571,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <!-- LOGO SRC CAN BE REPLACED HERE -->
+                <!-- REPLACE THIS SRC WITH YOUR LOGO -->
                 <img id="footerLogo" class="footer-logo-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iMTUiIGZpbGw9IiMwRDQ3QTEiLz4KPHRleHQgeD0iNTAlIiB5PSI1NSUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjBweCIgZm9udC13ZWlnaHQ9ImJvbGQiPkE8L3RleHQ+Cjwvc3ZnPg==" alt="Adler Logo">
                 <span>Adler Pharmaceuticals</span>
             </div>
@@ -1536,8 +1597,9 @@
                 sideEffects: "Nausea, headache, dizziness, fatigue, breast tenderness, abdominal pain",
                 warnings: "Not for regular contraception. Does not protect against STIs. May disrupt menstrual cycle. Not recommended for frequent use.",
                 storage: "Store at room temperature, away from moisture and direct sunlight",
+                // REPLACE THESE SRC VALUES WITH YOUR OWN IMAGE URLs
                 images: [
-                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
@@ -1554,6 +1616,7 @@
                 sideEffects: "Rare: Allergic reactions to latex. If irritation occurs, discontinue use.",
                 warnings: "For single use only. Do not reuse. Not 100% effective against all STIs. Store away from heat and direct sunlight.",
                 storage: "Store in a cool, dry place away from direct sunlight. Do not store in wallets or glove compartments.",
+                // REPLACE THESE SRC VALUES WITH YOUR OWN IMAGE URLs
                 images: [
                     "https://images.unsplash.com/photo-1579656596496-79d38aa4f76d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -1572,8 +1635,9 @@
                 sideEffects: "None when used as directed",
                 warnings: "Read instructions completely before use. Consult healthcare provider regardless of result. False results possible if test expired or improperly used.",
                 storage: "Store in a cool, dry place. Do not freeze.",
+                // REPLACE THESE SRC VALUES WITH YOUR OWN IMAGE URLs
                 images: [
-                    "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                 ],
@@ -1590,6 +1654,7 @@
                 sideEffects: "Mild digestive upset at high doses",
                 warnings: "Consult doctor if pregnant or nursing",
                 storage: "Store in a cool, dry place away from sunlight",
+                // REPLACE THESE SRC VALUES WITH YOUR OWN IMAGE URLs
                 images: [
                     "https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -1608,6 +1673,7 @@
                 sideEffects: "None when used as directed",
                 warnings: "For external use only. Seek professional help for serious injuries.",
                 storage: "Store in a dry, accessible location",
+                // REPLACE THESE SRC VALUES WITH YOUR OWN IMAGE URLs
                 images: [
                     "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                     "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -1846,41 +1912,12 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page).classList.add('active');
             
-            if (page === 'home') renderProducts();
+            if (page === 'home') {
+                // No need to render products since they're static HTML now
+                updateCartCount();
+            }
             if (page === 'cartPage') renderCart();
             updateCartCount();
-        }
-
-        // ===== PRODUCT GRID =====
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
-            
-            let hasProducts = false;
-            
-            for (let key in products) {
-                const p = products[key];
-                const stockStatus = checkStock(key, 1);
-                
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.onclick = () => openProductPage(key);
-                card.innerHTML = `
-                    <span class="product-badge">${p.category}</span>
-                    <img src="${p.images[0]}" alt="${p.name}" class="product-img">
-                    <div class="product-info">
-                        <h3 class="product-name">${p.name}</h3>
-                        <p class="product-price">K${p.price}</p>
-                        <div class="stock-status ${stockStatus.class}">${stockStatus.message}</div>
-                    </div>
-                `;
-                grid.appendChild(card);
-                hasProducts = true;
-            }
-            
-            if (!hasProducts) {
-                grid.innerHTML = '<p class="empty-cart">No products found matching your search.</p>';
-            }
         }
 
         // ===== FILTER + SEARCH =====
@@ -1889,37 +1926,20 @@
             const category = document.getElementById('categoryFilter').value;
 
             const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = '';
+            const productCards = productGrid.querySelectorAll('.product-card');
 
-            let hasProducts = false;
-
-            for (let key in products) {
-                const p = products[key];
-                const matchesSearch = p.name.toLowerCase().includes(searchTerm);
-                const matchesCategory = category === 'all' || p.category === category;
-                const stockStatus = checkStock(key, 1);
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                const productCategory = card.querySelector('.product-badge').textContent;
+                const matchesSearch = productName.includes(searchTerm);
+                const matchesCategory = category === 'all' || productCategory === category;
 
                 if (matchesSearch && matchesCategory) {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.onclick = () => openProductPage(key);
-                    card.innerHTML = `
-                        <span class="product-badge">${p.category}</span>
-                        <img src="${p.images[0]}" alt="${p.name}" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-name">${p.name}</h3>
-                            <p class="product-price">K${p.price}</p>
-                            <div class="stock-status ${stockStatus.class}">${stockStatus.message}</div>
-                        </div>
-                    `;
-                    productGrid.appendChild(card);
-                    hasProducts = true;
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
-            }
-            
-            if (!hasProducts) {
-                productGrid.innerHTML = '<p class="empty-cart">No products found matching your search.</p>';
-            }
+            });
         }
 
         // ===== PRODUCT DETAIL =====
@@ -2268,7 +2288,6 @@
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
             updateCartCount();
             renderCart();
             
@@ -2279,4 +2298,4 @@
         });
     </script>
 </body>
-</html>
+</html>p

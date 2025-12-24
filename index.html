@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus E-Pharmacy - Your Health, Our Priority</title>
+    <title>Adler Pharmaceuticals - Your Health, Our Priority</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,9 +15,9 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-light: #8b5cf6;
-            --primary-dark: #4f46e5;
+            --primary: #1E88E5;
+            --primary-light: #42A5F5;
+            --primary-dark: #1565C0;
             --secondary: #10b981;
             --accent: #f59e0b;
             --light: #f8fafc;
@@ -70,14 +70,54 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             font-size: 1.5rem;
             font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
+            color: white;
         }
 
-        .logo i {
-            font-size: 2rem;
+        .logo-image-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-sub {
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.9;
         }
 
         .header-actions {
@@ -134,6 +174,59 @@
             box-shadow: 0 6px 8px rgba(239, 68, 68, 0.3);
         }
 
+        /* Logo Upload Modal */
+        .logo-upload-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo-upload-modal.active {
+            display: flex;
+        }
+
+        .logo-upload-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .logo-preview {
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto;
+            border-radius: 12px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px dashed var(--primary);
+        }
+
+        .logo-preview-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
         /* Page Styles */
         .page {
             display: none;
@@ -151,7 +244,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.9)), url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(135deg, rgba(30, 136, 229, 0.9), rgba(66, 165, 245, 0.9)), url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -196,12 +289,12 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 6px 20px rgba(30, 136, 229, 0.6);
         }
 
         .btn-secondary {
@@ -224,6 +317,12 @@
         .btn-success:hover {
             background: #0d9c6d;
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
         /* Product Grid */
@@ -456,7 +555,7 @@
         select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
         }
 
         /* Cart Page */
@@ -568,7 +667,7 @@
         .form-group select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
         }
 
         .form-group textarea {
@@ -899,7 +998,7 @@
         .filter-search select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
         }
 
         /* Product Details Section */
@@ -939,6 +1038,26 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-logo-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: white;
+            padding: 5px;
         }
 
         .copyright {
@@ -951,6 +1070,17 @@
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
+                text-align: center;
+            }
+            
+            .logo {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .logo-text {
+                align-items: center;
             }
             
             .hero h1 {
@@ -1068,6 +1198,34 @@
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">Product added to cart!</span>
+    </div>
+
+    <!-- Logo Upload Modal -->
+    <div class="logo-upload-modal" id="logoUploadModal">
+        <div class="logo-upload-content">
+            <h2><i class="fas fa-image"></i> Upload Company Logo</h2>
+            <p>Upload your company logo to customize the pharmacy appearance</p>
+            
+            <div class="logo-preview" id="logoPreview">
+                <img id="logoPreviewImg" class="logo-preview-img" src="" alt="Logo Preview" style="display: none;">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <i class="fas fa-building" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <p>No logo uploaded yet</p>
+                    <p>Logo will appear here</p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="logoUpload">Select Logo Image</label>
+                <input type="file" id="logoUpload" accept="image/*" onchange="previewLogo(event)">
+                <div class="form-note">Recommended: Square logo, transparent background, minimum 200x200 pixels</div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="closeLogoModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="uploadLogo()">Save Logo</button>
+            </div>
+        </div>
     </div>
 
     <!-- Emergency Contacts Modal -->
@@ -1225,10 +1383,15 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <div class="logo" onclick="showPage('home')">
-                <i class="fas fa-prescription-bottle-alt"></i>
-                <span>Campus E-Pharmacy</span>
-            </div>
+            <a href="#" class="logo" onclick="showPage('home'); return false;">
+                <div class="logo-image-container">
+                    <img id="headerLogo" class="logo-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMTU2NUMwIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwcHgiPkE8L3RleHQ+Cjwvc3ZnPg==" alt="Adler Pharmaceuticals Logo">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Adler Pharmaceuticals</span>
+                    <span class="logo-sub">Your Health, Our Priority</span>
+                </div>
+            </a>
             <div class="header-actions">
                 <button class="btn-emergency" onclick="openModal('emergencyModal')" title="Emergency Contacts">
                     <i class="fas fa-phone-alt"></i> Emergency
@@ -1237,6 +1400,9 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </div>
+                <button class="btn btn-small btn-secondary" onclick="openLogoModal()" title="Upload Logo">
+                    <i class="fas fa-upload"></i> Logo
+                </button>
             </div>
         </div>
     </header>
@@ -1283,10 +1449,11 @@
                 <input type="text" id="searchInput" placeholder="Search medicine..." oninput="filterProducts()">
                 <select id="categoryFilter" onchange="filterProducts()">
                     <option value="all">All Categories</option>
-                    <option value="Vitamins">Vitamins</option>
+                    <option value="Contraceptives">Contraceptives</option>
                     <option value="OTC">OTC</option>
                     <option value="Emergency">Emergency</option>
                     <option value="First Aid">First Aid</option>
+                    <option value="Vitamins">Vitamins</option>
                 </select>
             </div>
 
@@ -1385,8 +1552,12 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="footer-logo">
+                <img id="footerLogo" class="footer-logo-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMTU2NUMwIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwcHgiPkE8L3RleHQ+Cjwvc3ZnPg==" alt="Adler Logo">
+                <span>Adler Pharmaceuticals</span>
+            </div>
             <div class="copyright">
-                &copy; 2023 Campus E-Pharmacy. All Rights Reserved.
+                &copy; 2023 Adler Pharmaceuticals. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -1396,8 +1567,30 @@
         const adminPhone = '260974867751';
         const apiKey = '7071944';
 
+        // Logo management
+        let currentLogo = localStorage.getItem('adlerLogo') || "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMTU2NUMwIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwcHgiPkE8L3RleHQ+Cjwvc3ZnPg==";
+        let logoFile = null;
+
         // Sample products with enhanced information - UPDATED PRODUCTS
         let products = {
+            condoms: {
+                name: "Premium Condoms (3-pack)",
+                price: 25,
+                description: "Premium quality latex condoms for safe sex and protection against STIs and pregnancy. Lubricated for comfort.",
+                dosage: "Use one condom per act of intercourse. Apply before any genital contact. Check expiration date before use.",
+                sideEffects: "Rare: Allergic reactions to latex. If irritation occurs, discontinue use.",
+                warnings: "For single use only. Do not reuse. Not 100% effective against all STIs. Store away from heat and direct sunlight.",
+                storage: "Store in a cool, dry place away from direct sunlight. Do not store in wallets or glove compartments.",
+                images: [
+                    "https://images.unsplash.com/photo-1579656596496-79d38aa4f76d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                category: "Contraceptives",
+                requiresAgeVerification: true,
+                stock: 40,
+                lowStockThreshold: 8
+            },
             morning_after_pill: {
                 name: "Morning After Pill",
                 price: 45,
@@ -1478,6 +1671,65 @@
         let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
         let pendingAction = null;
         let currentSlide = 0;
+
+        // ===== LOGO FUNCTIONS =====
+        function openLogoModal() {
+            document.getElementById('logoUploadModal').classList.add('active');
+            // Clear previous file input
+            document.getElementById('logoUpload').value = '';
+            // Reset preview
+            document.getElementById('logoPreviewImg').style.display = 'none';
+            document.getElementById('logoPlaceholder').style.display = 'block';
+        }
+
+        function closeLogoModal() {
+            document.getElementById('logoUploadModal').classList.remove('active');
+            logoFile = null;
+        }
+
+        function previewLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                logoFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImg = document.getElementById('logoPreviewImg');
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                    document.getElementById('logoPlaceholder').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function uploadLogo() {
+            if (!logoFile) {
+                showNotification("Please select a logo image first.", true);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Save logo to localStorage
+                localStorage.setItem('adlerLogo', e.target.result);
+                currentLogo = e.target.result;
+                
+                // Update logos on page
+                updateLogos();
+                
+                showNotification("Logo uploaded successfully!");
+                closeLogoModal();
+            };
+            reader.readAsDataURL(logoFile);
+        }
+
+        function updateLogos() {
+            const headerLogo = document.getElementById('headerLogo');
+            const footerLogo = document.getElementById('footerLogo');
+            
+            if (headerLogo) headerLogo.src = currentLogo;
+            if (footerLogo) footerLogo.src = currentLogo;
+        }
 
         // ===== SCROLL TO PRODUCTS FUNCTION =====
         function scrollToProducts() {
@@ -1690,7 +1942,7 @@
 
         // ===== ORDER TRACKING =====
         function generateOrderId() {
-            return 'CAMPUS-' + Date.now().toString().slice(-6) + '-' + Math.random().toString(36).substr(2, 3).toUpperCase();
+            return 'ADLER-' + Date.now().toString().slice(-6) + '-' + Math.random().toString(36).substr(2, 3).toUpperCase();
         }
 
         // ===== PAGE NAV =====
@@ -2011,7 +2263,7 @@
                 const displayName = customerName || 'Anonymous';
 
                 // Create detailed order message
-                let message = `📦 *NEW ORDER - CAMPUS E-PHARMACY* 📦\n\n`;
+                let message = `📦 *NEW ORDER - ADLER PHARMACEUTICALS* 📦\n\n`;
                 message += `📋 *Order ID:* ${orderId}\n`;
                 message += `👤 *Customer:* ${displayName}\n`;
                 message += `📞 *WhatsApp:* ${formattedPhone}\n`;
@@ -2120,6 +2372,13 @@
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            // Load saved logo
+            const savedLogo = localStorage.getItem('adlerLogo');
+            if (savedLogo) {
+                currentLogo = savedLogo;
+            }
+            updateLogos();
+            
             renderProducts();
             updateCartCount();
             renderCart();

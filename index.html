@@ -50,7 +50,7 @@
             flex: 1;
         }
 
-        /* Header Styles - Consistent across all pages */
+        /* Header Styles - Fixed Logo Size Ratio */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
@@ -79,31 +79,41 @@
             color: white;
         }
 
+        /* FIXED: Logo container with fixed aspect ratio and bigger size */
         .logo-image-container {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9);
+            width: 70px; /* Increased from 50px */
+            height: 70px; /* Increased from 50px */
+            min-width: 70px; /* Ensures fixed size */
+            min-height: 70px; /* Ensures fixed size */
+            border-radius: 12px; /* Slightly larger radius */
+            background: rgba(255, 255, 255, 0.95); /* More opaque background */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
             border: 2px solid white;
         }
 
         .logo-image-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             background: white;
         }
 
+        /* FIXED: Logo image with proper aspect ratio */
         .logo-img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            padding: 5px;
+            object-fit: contain; /* Changed from contain to cover for better fit */
+            padding: 8px; /* Increased padding */
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image-container:hover .logo-img {
+            transform: scale(1.05);
         }
 
         .logo-text {
@@ -113,16 +123,19 @@
         }
 
         .logo-main {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.6rem; /* Slightly larger */
+            font-weight: 800; /* Bolder */
             color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
         }
 
         .logo-sub {
-            font-size: 0.85rem;
-            font-weight: 400;
-            opacity: 0.9;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem; /* Slightly larger */
+            font-weight: 500; /* Medium weight */
+            opacity: 0.95;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 2px;
         }
 
         .header-actions {
@@ -134,53 +147,55 @@
         .cart-icon {
             position: relative;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.6rem; /* Slightly larger */
             transition: transform 0.3s;
             color: white;
         }
 
         .cart-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.15); /* Slightly more scale */
             color: var(--accent);
         }
 
         .cart-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -10px; /* Adjusted for larger icon */
+            right: -10px; /* Adjusted for larger icon */
             background: var(--accent);
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.75rem;
+            width: 24px; /* Larger */
+            height: 24px; /* Larger */
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             border: 2px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .btn-emergency {
             background: var(--danger);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 18px; /* Slightly larger */
+            border-radius: 25px; /* More rounded */
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(211, 47, 47, 0.2);
+            box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
             display: flex;
             align-items: center;
-            gap: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            gap: 8px; /* More spacing */
+            border: 1px solid rgba(255, 255, 255, 0.4); /* More visible border */
+            font-weight: 600;
         }
 
         .btn-emergency:hover {
             background: #C62828;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(211, 47, 47, 0.3);
+            transform: translateY(-3px); /* More lift */
+            box-shadow: 0 8px 12px rgba(211, 47, 47, 0.4);
         }
 
         /* Page Styles */
@@ -1016,7 +1031,7 @@
             color: var(--dark);
         }
 
-        /* Footer Styles */
+        /* Footer Styles - Fixed Footer Logo */
         footer {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
@@ -1041,23 +1056,30 @@
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            gap: 12px;
+            font-size: 1.3rem; /* Slightly larger */
+            font-weight: 700; /* Bolder */
         }
 
+        /* FIXED: Footer logo with fixed size */
         .footer-logo-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 4px;
+            width: 45px; /* Increased from 30px */
+            height: 45px; /* Increased from 30px */
+            min-width: 45px; /* Fixed size */
+            min-height: 45px; /* Fixed size */
+            border-radius: 8px; /* Slightly larger */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px; /* More padding */
+            object-fit: contain; /* Ensure logo fits well */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
         .copyright {
             font-size: 0.95rem;
-            opacity: 0.9;
-            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.95;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
         }
 
         /* Responsive Design */
@@ -1070,12 +1092,20 @@
             
             .logo {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
                 text-align: center;
             }
             
             .logo-text {
                 align-items: center;
+            }
+            
+            /* Keep logo size consistent on mobile */
+            .logo-image-container {
+                width: 65px;
+                height: 65px;
+                min-width: 65px;
+                min-height: 65px;
             }
             
             .hero h1 {
@@ -1152,6 +1182,14 @@
             .filter-search select {
                 width: 100%;
             }
+            
+            /* Adjust footer logo for mobile */
+            .footer-logo-img {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                min-height: 40px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1170,6 +1208,22 @@
             
             .form-group {
                 margin-bottom: 0.7rem;
+            }
+            
+            /* Further adjust logo for very small screens */
+            .logo-image-container {
+                width: 60px;
+                height: 60px;
+                min-width: 60px;
+                min-height: 60px;
+            }
+            
+            .logo-main {
+                font-size: 1.4rem;
+            }
+            
+            .logo-sub {
+                font-size: 0.8rem;
             }
         }
 
@@ -1352,8 +1406,8 @@
     <header>
         <div class="header-content">
             <a href="#" class="logo" onclick="showPage('home'); return false;">
-                <div class="Photos/Logo/42DA08D2-5F3A-47AF-A240-FB845D74EEB9.png">
-                    <!-- REPLACE THIS SRC WITH YOUR LOGO -->
+                <div class="logo-image-container">
+                    <!-- Your actual logo -->
                     <img id="headerLogo" class="logo-img" src="Photos/Logo/42DA08D2-5F3A-47AF-A240-FB845D74EEB9.png" alt="Adler Pharmaceuticals Logo">
                 </div>
                 <div class="logo-text">
@@ -1428,7 +1482,6 @@
                 <!-- Morning After Pill -->
                 <div class="product-card" onclick="openProductPage('morning_after_pill')">
                     <span class="product-badge">Emergency</span>
-                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
                     <img src="Photos/Morning after/IMG_6696.png" alt="Morning After Pill" class="product-img">
                     <div class="product-info">
                         <h3 class="product-name">Morning After Pill</h3>
@@ -1440,7 +1493,6 @@
                 <!-- Condoms -->
                 <div class="product-card" onclick="openProductPage('condoms')">
                     <span class="product-badge">Contraceptives</span>
-                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
                     <img src="Photos/Condoms/IMG_6704.jpeg" alt="Premium Condoms" class="product-img">
                     <div class="product-info">
                         <h3 class="product-name">Premium Condoms (3-pack)</h3>
@@ -1452,7 +1504,6 @@
                 <!-- Pregnancy Test -->
                 <div class="product-card" onclick="openProductPage('pregnancy_test')">
                     <span class="product-badge">OTC</span>
-                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
                     <img src="Photos/Pregnancy test/IMG_6708.jpeg" alt="Pregnancy Test Kit" class="product-img">
                     <div class="product-info">
                         <h3 class="product-name">Pregnancy Test Kit</h3>
@@ -1464,7 +1515,6 @@
                 <!-- Vitamin C -->
                 <div class="product-card" onclick="openProductPage('vitamin_c')">
                     <span class="product-badge">Vitamins</span>
-                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
                     <img src="https://images.unsplash.com/photo-1590301157283-8fbce4c40155?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Vitamin C 500mg" class="product-img">
                     <div class="product-info">
                         <h3 class="product-name">Vitamin C 500mg</h3>
@@ -1476,7 +1526,6 @@
                 <!-- First Aid Kit -->
                 <div class="product-card" onclick="openProductPage('first_aid_kit')">
                     <span class="product-badge">First Aid</span>
-                    <!-- REPLACE THIS SRC WITH YOUR IMAGE -->
                     <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Campus First Aid Kit" class="product-img">
                     <div class="product-info">
                         <h3 class="product-name">Campus First Aid Kit</h3>
@@ -1580,8 +1629,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <!-- REPLACE THIS SRC WITH YOUR LOGO -->
-                <img id="footerLogo" class="footer-logo-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iMTUiIGZpbGw9IiMwRDQ3QTEiLz4KPHRleHQgeD0iNTAlIiB5PSI1NSUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjBweCIgZm9udC13ZWlnaHQ9ImJvbGQiPkE8L3RleHQ+Cjwvc3ZnPg==" alt="Adler Logo">
+                <!-- Use your actual logo here too -->
+                <img id="footerLogo" class="footer-logo-img" src="Photos/Logo/42DA08D2-5F3A-47AF-A240-FB845D74EEB9.png" alt="Adler Logo">
                 <span>Adler Pharmaceuticals</span>
             </div>
             <div class="copyright">
